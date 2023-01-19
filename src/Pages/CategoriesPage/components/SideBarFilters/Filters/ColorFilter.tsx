@@ -14,6 +14,15 @@ type ColorProps ={
 
 export const ColorFilter:FC<ColorProps> = ({color,setColor}) => {
 
+    const colors = [
+        {name:'blue', color:'#337AB6'},
+        {name:'green', color:'#5CB85C'},
+        {name:'orange', color:'#F0AC4E'},
+        {name:'red', color:'#FF0000'},
+        {name:'skyblue', color:'#5BC0DE'},
+        {name:'black', color:'#121720'},
+    ]
+
     const [open,setOpen] = useState<boolean>(false);
 
     const handleClick = () => {
@@ -41,51 +50,22 @@ export const ColorFilter:FC<ColorProps> = ({color,setColor}) => {
             </ListItemButton>
             <Collapse in={open} timeout="auto" unmountOnExit>
                 <List component="div" disablePadding sx={{display:"flex"}}>
-                    <ListItemButton sx={{ pl: 4,paddingLeft:0,textAlign:'center'}} 
-                                    selected={color == "blue" && true} 
-                                    data-color='blue' 
-                                    onClick ={(e)=>onSelectColor(e)}>
+                    
+                    {colors.map(item=>{
+                        return(
 
-                        <div className="w-7 h-7 rounded-[32px] bg-[#337AB6]"></div>
+                            <ListItemButton 
+                                sx={{ pl: 4,paddingLeft:0,textAlign:'center'}} 
+                                selected={color == item.name} 
+                                data-color={item.name} 
+                                onClick ={(e)=>onSelectColor(e)}>
 
-                    </ListItemButton>
-                    <ListItemButton sx={{ pl: 4,paddingLeft:0,textAlign:'center'}} 
-                                    selected={color == "green" && true}    
-                                    data-color='green' 
-                                    onClick ={(e)=>onSelectColor(e)}>
+                                <div className={`w-7 h-7 rounded-[32px] bg-[${item.color}]`}></div>
 
-                        <div className="w-7 h-7 rounded-[32px] bg-[#5CB85C]"></div>
+                            </ListItemButton>
+                        )
+                    })}
 
-                    </ListItemButton>
-                    <ListItemButton sx={{ pl: 4,paddingLeft:0,textAlign:'center'}} 
-                                    selected={color == "orange" && true} 
-                                    data-color='orange' 
-                                    onClick ={(e)=>onSelectColor(e)}>
-
-                        <div className="w-7 h-7 rounded-[32px] bg-[#F0AC4E]"></div>
-                    </ListItemButton>
-                    <ListItemButton sx={{ pl: 4,paddingLeft:0,textAlign:'center'}} 
-                                    selected={color == "red" && true} 
-                                    data-color='red' 
-                                    onClick ={(e)=>onSelectColor(e)}>
-                        <div className="w-7 h-7 rounded-[32px] bg-[#FF0000]"></div>
-
-                    </ListItemButton>
-                    <ListItemButton sx={{ pl: 4,paddingLeft:0,textAlign:'center'}} 
-                                    selected={color == "skyblue" && true} 
-                                    data-color='skyblue' 
-                                    onClick ={(e)=>onSelectColor(e)}>
-                        <div className="w-7 h-7 rounded-[32px] bg-[#5BC0DE]"></div>
-
-                    </ListItemButton>
-                    <ListItemButton sx={{ pl: 4,paddingLeft:0,textAlign:'center'}} 
-                                    selected={color == "black" && true} 
-                                    data-color='black' 
-                                    onClick ={(e)=>onSelectColor(e)}>
-
-                        <div className="w-7 h-7 rounded-[32px] bg-[#121720]"></div>
-
-                    </ListItemButton>
                 </List>
             </Collapse>
        </div>

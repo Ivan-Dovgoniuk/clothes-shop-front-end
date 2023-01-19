@@ -1,3 +1,5 @@
+import {FC,useState } from 'react';
+
 import ListItemText from '@mui/material/ListItemText';
 import Collapse from '@mui/material/Collapse';
 import List from '@mui/material/List';
@@ -5,7 +7,7 @@ import ListItemButton from '@mui/material/ListItemButton';
 import ExpandLess from '@mui/icons-material/ExpandLess';
 import ExpandMore from '@mui/icons-material/ExpandMore';
 
-import {FC, useRef, useState } from 'react';
+
 
 
 type SizesProps = {
@@ -16,6 +18,8 @@ type SizesProps = {
 
 
 export const SizeFilter:FC<SizesProps> = ({sizes,setSizes}) => {
+
+    const sizesArr = ['XXL','XS','XL','M','L']
 
     const [open,setOpen] = useState<boolean>(false);
 
@@ -50,47 +54,25 @@ export const SizeFilter:FC<SizesProps> = ({sizes,setSizes}) => {
             </ListItemButton>
             <Collapse in={open} timeout="auto" unmountOnExit>
                 <List component="div" disablePadding sx={{display:"flex"}}>
-                    <ListItemButton data-size='XXL' 
-                                    selected={sizes.includes('XXL') && true} 
-                                    className={'bg-red-400'} 
-                                    sx={{pl: 4,paddingLeft:0,textAlign:'center','&.Mui-selected':{background:'grey'}} } 
-                                    onClick={(e)=>addSize(e)}
-                    >
-                        <ListItemText primary="XXL"/>
 
-                    </ListItemButton>
-                    <ListItemButton  data-size='XS' 
-                                     selected={sizes.includes('XS') && true} 
-                                     sx={{ pl: 4,paddingLeft:0,textAlign:'center','&.Mui-selected':{background:'grey'}}}
-                                     onClick={(e)=>addSize(e)}>
+                    {sizesArr.map(item=>{
+                        return(
 
-                        <ListItemText primary="XS"/>
+                        <ListItemButton 
+                            data-size={item}
+                            selected={sizes.includes(item)} 
+                            className={'bg-red-400'} 
+                            sx={{pl: 4,paddingLeft:0,textAlign:'center','&.Mui-selected':{background:'grey'}} } 
+                            onClick={(e)=>addSize(e)}
+                            >
 
-                    </ListItemButton>
-                    <ListItemButton  data-size='XL' 
-                                     selected={sizes.includes('XL') && true} 
-                                     sx={{ pl: 4,paddingLeft:0,textAlign:'center','&.Mui-selected':{background:'grey'}}} 
-                                     onClick={(e)=>addSize(e)}>
-                                        
-                        <ListItemText primary="XL"/>
+                            <ListItemText primary={item}/>
 
-                    </ListItemButton>
-                    <ListItemButton   data-size='M' 
-                                      selected={sizes.includes('M') && true} 
-                                      sx={{ pl: 4,paddingLeft:0,textAlign:'center','&.Mui-selected':{background:'grey'}}} 
-                                      onClick={(e)=>addSize(e)}>
+                        </ListItemButton>
 
-                        <ListItemText primary="M"/>
+                        )
+                    })}
 
-                    </ListItemButton>
-                    <ListItemButton   data-size='L' 
-                                      selected={sizes.includes('L') && true} 
-                                      sx={{ pl: 4,paddingLeft:0,textAlign:'center','&.Mui-selected':{background:'grey'}}}
-                                      onClick={(e)=>addSize(e)}>
-
-                        <ListItemText primary="L"/>
-
-                    </ListItemButton>
                 </List>
             </Collapse>
        </div>
